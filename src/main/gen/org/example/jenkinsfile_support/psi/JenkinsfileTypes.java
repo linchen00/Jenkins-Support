@@ -148,7 +148,7 @@ public interface JenkinsfileTypes {
   IElementType STEP_EXPRESSION = new JenkinsfileElementType("STEP_EXPRESSION");
   IElementType STRING_EXPRESSION = new JenkinsfileElementType("STRING_EXPRESSION");
   IElementType STRING_LIST = new JenkinsfileElementType("STRING_LIST");
-  IElementType STRING_LITERAL = new JenkinsfileElementType("STRING_LITERAL");
+  IElementType STRING_LITERAL_EXPR = new JenkinsfileElementType("STRING_LITERAL_EXPR");
   IElementType SWITCH_BODY = new JenkinsfileElementType("SWITCH_BODY");
   IElementType SWITCH_STATEMENT = new JenkinsfileElementType("SWITCH_STATEMENT");
   IElementType TEST_OPTIONS = new JenkinsfileElementType("TEST_OPTIONS");
@@ -791,8 +791,8 @@ public interface JenkinsfileTypes {
       else if (type == STRING_LIST) {
         return new JenkinsfileStringListImpl(node);
       }
-      else if (type == STRING_LITERAL) {
-        return new JenkinsfileStringLiteralImpl(node);
+      else if (type == STRING_LITERAL_EXPR) {
+        return new JenkinsfileStringLiteralExprImpl(node);
       }
       else if (type == SWITCH_BODY) {
         return new JenkinsfileSwitchBodyImpl(node);

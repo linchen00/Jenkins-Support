@@ -17,6 +17,6 @@ public interface JenkinsfileLiteral extends PsiElement {
   JenkinsfileNumberLiteral getNumberLiteral();
 
   @Nullable
-  JenkinsfileStringLiteral getStringLiteral();
+  JenkinsfileStringLiteralExpr getStringLiteralExpr();
 
 }

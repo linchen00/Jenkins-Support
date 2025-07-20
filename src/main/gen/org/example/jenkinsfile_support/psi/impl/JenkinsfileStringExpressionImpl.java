@@ -35,8 +35,8 @@ public class JenkinsfileStringExpressionImpl extends ASTWrapperPsiElement implem
 
   @Override
   @Nullable
-  public JenkinsfileStringLiteral getStringLiteral() {
-    return findChildByClass(JenkinsfileStringLiteral.class);
+  public JenkinsfileStringLiteralExpr getStringLiteralExpr() {
+    return findChildByClass(JenkinsfileStringLiteralExpr.class);
   }
 
 }

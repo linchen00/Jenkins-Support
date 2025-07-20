@@ -62,12 +62,18 @@ tasks {
         pathToPsiRoot.set("org/example/jenkinsfile_support/psi")
     }
 
+    // Generate lexer from Flex
+    generateLexer {
+        sourceFile.set(file("src/main/flex/JenkinsfileLexer.flex"))
+        targetOutputDir.set(file("src/main/gen/org/example/jenkinsfile_support/lexer"))
+    }
+
     compileJava {
         dependsOn("generateLexer")
     }
     
-    // Make compileKotlin depend on generateParser
+    // Make compileKotlin depend on generateParser and generateLexer
     compileKotlin {
-        dependsOn("generateParser")
+        dependsOn("generateParser", "generateLexer")
     }
 }

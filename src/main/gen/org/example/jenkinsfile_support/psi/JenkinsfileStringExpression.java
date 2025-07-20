@@ -11,6 +11,6 @@ public interface JenkinsfileStringExpression extends PsiElement {
   JenkinsfileExpression getExpression();
 
   @Nullable
-  JenkinsfileStringLiteral getStringLiteral();
+  JenkinsfileStringLiteralExpr getStringLiteralExpr();
 
 }

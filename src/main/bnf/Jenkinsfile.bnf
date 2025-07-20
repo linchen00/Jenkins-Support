@@ -629,9 +629,9 @@ primary_expression ::= literal
                     | closure_expression
                     | gstring_expression
 
-literal ::= string_literal | number_literal | boolean_literal | null_literal
+literal ::= string_literal_expr | number_literal | boolean_literal | null_literal
 
-string_literal ::= STRING_LITERAL | SINGLE_QUOTED_STRING | MULTILINE_STRING | MULTILINE_SINGLE_STRING
+string_literal_expr ::= STRING_LITERAL | SINGLE_QUOTED_STRING | MULTILINE_STRING | MULTILINE_SINGLE_STRING
 
 number_literal ::= NUMBER
 
@@ -684,7 +684,7 @@ scm_definition ::= DOLLAR IDENTIFIER COLON string_expression COMMA IDENTIFIER CO
 
 scm_option ::= IDENTIFIER COLON string_expression
 
-string_expression ::= string_literal | expression
+string_expression ::= string_literal_expr | expression
 
 boolean_expression ::= boolean_literal | expression
 

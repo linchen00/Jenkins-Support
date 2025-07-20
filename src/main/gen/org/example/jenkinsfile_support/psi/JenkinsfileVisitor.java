@@ -567,7 +567,7 @@ public class JenkinsfileVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitStringLiteral(@NotNull JenkinsfileStringLiteral o) {
+  public void visitStringLiteralExpr(@NotNull JenkinsfileStringLiteralExpr o) {
     visitPsiElement(o);
   }
 

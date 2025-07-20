@@ -11,14 +11,14 @@ import static org.example.jenkinsfile_support.psi.JenkinsfileTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import org.example.jenkinsfile_support.psi.*;
 
-public class JenkinsfileStringLiteralImpl extends ASTWrapperPsiElement implements JenkinsfileStringLiteral {
+public class JenkinsfileStringLiteralExprImpl extends ASTWrapperPsiElement implements JenkinsfileStringLiteralExpr {
 
-  public JenkinsfileStringLiteralImpl(@NotNull ASTNode node) {
+  public JenkinsfileStringLiteralExprImpl(@NotNull ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull JenkinsfileVisitor visitor) {
-    visitor.visitStringLiteral(this);
+    visitor.visitStringLiteralExpr(this);
   }
 
   @Override

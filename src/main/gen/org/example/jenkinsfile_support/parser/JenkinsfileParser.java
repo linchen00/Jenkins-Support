@@ -2117,12 +2117,12 @@ public class JenkinsfileParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // string_literal | number_literal | boolean_literal | null_literal
+  // string_literal_expr | number_literal | boolean_literal | null_literal
   public static boolean literal(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "literal")) return false;
     boolean result_;
     Marker marker_ = enter_section_(builder_, level_, _NONE_, LITERAL, "<literal>");
-    result_ = string_literal(builder_, level_ + 1);
+    result_ = string_literal_expr(builder_, level_ + 1);
     if (!result_) result_ = number_literal(builder_, level_ + 1);
     if (!result_) result_ = boolean_literal(builder_, level_ + 1);
     if (!result_) result_ = null_literal(builder_, level_ + 1);
@@ -4114,12 +4114,12 @@ public class JenkinsfileParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // string_literal | expression
+  // string_literal_expr | expression
   public static boolean string_expression(PsiBuilder builder_, int level_) {
     if (!recursion_guard_(builder_, level_, "string_expression")) return false;
     boolean result_;
     Marker marker_ = enter_section_(builder_, level_, _NONE_, STRING_EXPRESSION, "<string expression>");
-    result_ = string_literal(builder_, level_ + 1);
+    result_ = string_literal_expr(builder_, level_ + 1);
     if (!result_) result_ = expression(builder_, level_ + 1);
     exit_section_(builder_, level_, marker_, result_, false, null);
     return result_;
@@ -4161,10 +4161,10 @@ public class JenkinsfileParser implements PsiParser, LightPsiParser {
 
   /* ********************************************************** */
   // STRING_LITERAL | SINGLE_QUOTED_STRING | MULTILINE_STRING | MULTILINE_SINGLE_STRING
-  public static boolean string_literal(PsiBuilder builder_, int level_) {
-    if (!recursion_guard_(builder_, level_, "string_literal")) return false;
+  public static boolean string_literal_expr(PsiBuilder builder_, int level_) {
+    if (!recursion_guard_(builder_, level_, "string_literal_expr")) return false;
     boolean result_;
-    Marker marker_ = enter_section_(builder_, level_, _NONE_, STRING_LITERAL, "<string literal>");
+    Marker marker_ = enter_section_(builder_, level_, _NONE_, STRING_LITERAL_EXPR, "<string literal expr>");
     result_ = consumeToken(builder_, STRING_LITERAL);
     if (!result_) result_ = consumeToken(builder_, SINGLE_QUOTED_STRING);
     if (!result_) result_ = consumeToken(builder_, MULTILINE_STRING);

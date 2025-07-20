@@ -47,8 +47,8 @@ public class JenkinsfileLiteralImpl extends ASTWrapperPsiElement implements Jenk
 
   @Override
   @Nullable
-  public JenkinsfileStringLiteral getStringLiteral() {
-    return findChildByClass(JenkinsfileStringLiteral.class);
+  public JenkinsfileStringLiteralExpr getStringLiteralExpr() {
+    return findChildByClass(JenkinsfileStringLiteralExpr.class);
   }
 
 }

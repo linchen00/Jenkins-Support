@@ -5,7 +5,7 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface JenkinsfileStringLiteral extends PsiElement {
+public interface JenkinsfileStringLiteralExpr extends PsiElement {
 
   @Nullable
   PsiElement getMultilineSingleString();
