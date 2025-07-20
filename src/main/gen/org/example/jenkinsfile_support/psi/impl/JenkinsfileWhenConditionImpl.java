@@ -1,0 +1,66 @@
+// This is a generated file. Not intended for manual editing.
+package org.example.jenkinsfile_support.psi.impl;
+
+import java.util.List;
+import org.jetbrains.annotations.*;
+import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiElementVisitor;
+import com.intellij.psi.util.PsiTreeUtil;
+import static org.example.jenkinsfile_support.psi.JenkinsfileTypes.*;
+import com.intellij.extapi.psi.ASTWrapperPsiElement;
+import org.example.jenkinsfile_support.psi.*;
+
+public class JenkinsfileWhenConditionImpl extends ASTWrapperPsiElement implements JenkinsfileWhenCondition {
+
+  public JenkinsfileWhenConditionImpl(@NotNull ASTNode node) {
+    super(node);
+  }
+
+  public void accept(@NotNull JenkinsfileVisitor visitor) {
+    visitor.visitWhenCondition(this);
+  }
+
+  @Override
+  public void accept(@NotNull PsiElementVisitor visitor) {
+    if (visitor instanceof JenkinsfileVisitor) accept((JenkinsfileVisitor)visitor);
+    else super.accept(visitor);
+  }
+
+  @Override
+  @NotNull
+  public List<JenkinsfileGroovyCode> getGroovyCodeList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, JenkinsfileGroovyCode.class);
+  }
+
+  @Override
+  @Nullable
+  public JenkinsfileStringExpression getStringExpression() {
+    return findChildByClass(JenkinsfileStringExpression.class);
+  }
+
+  @Override
+  @Nullable
+  public JenkinsfileWhenChangeRequestParams getWhenChangeRequestParams() {
+    return findChildByClass(JenkinsfileWhenChangeRequestParams.class);
+  }
+
+  @Override
+  @NotNull
+  public List<JenkinsfileWhenCondition> getWhenConditionList() {
+    return PsiTreeUtil.getChildrenOfTypeAsList(this, JenkinsfileWhenCondition.class);
+  }
+
+  @Override
+  @Nullable
+  public JenkinsfileWhenEnvironmentParams getWhenEnvironmentParams() {
+    return findChildByClass(JenkinsfileWhenEnvironmentParams.class);
+  }
+
+  @Override
+  @Nullable
+  public JenkinsfileWhenEqualsParams getWhenEqualsParams() {
+    return findChildByClass(JenkinsfileWhenEqualsParams.class);
+  }
+
+}

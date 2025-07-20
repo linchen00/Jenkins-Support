@@ -1,0 +1,691 @@
+{
+  parserClass="org.example.jenkinsfile_support.parser.JenkinsfileParser"
+  extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
+  psiClassPrefix="Jenkinsfile"
+  psiImplClassSuffix="Impl"
+  psiPackage="org.example.jenkinsfile_support.psi"
+  psiImplPackage="org.example.jenkinsfile_support.psi.impl"
+  elementTypeHolderClass="org.example.jenkinsfile_support.psi.JenkinsfileTypes"
+  elementTypeClass="org.example.jenkinsfile_support.psi.JenkinsfileElementType"
+  tokenTypeClass="org.example.jenkinsfile_support.psi.JenkinsfileTokenType"
+
+  tokens=[
+    // Keywords
+    KW_PIPELINE="pipeline"
+    KW_AGENT="agent"
+    KW_STAGES="stages"
+    KW_STAGE="stage"
+    KW_STEPS="steps"
+    KW_POST="post"
+    KW_OPTIONS="options"
+    KW_ENVIRONMENT="environment"
+    KW_PARAMETERS="parameters"
+    KW_TRIGGERS="triggers"
+    KW_TOOLS="tools"
+    KW_WHEN="when"
+    KW_PARALLEL="parallel"
+    KW_MATRIX="matrix"
+    KW_INPUT="input"
+    KW_SCRIPT="script"
+    
+    // Post conditions
+    KW_ALWAYS="always"
+    KW_CHANGED="changed"
+    KW_FIXED="fixed"
+    KW_REGRESSION="regression"
+    KW_ABORTED="aborted"
+    KW_FAILURE="failure"
+    KW_SUCCESS="success"
+    KW_UNSTABLE="unstable"
+    KW_UNSUCCESSFUL="unsuccessful"
+    KW_CLEANUP="cleanup"
+    
+    // Agent types
+    KW_ANY="any"
+    KW_NONE="none"
+    KW_LABEL="label"
+    KW_NODE="node"
+    KW_DOCKER="docker"
+    KW_DOCKERFILE="dockerfile"
+    KW_KUBERNETES="kubernetes"
+    
+    // When conditions
+    KW_BRANCH="branch"
+    KW_BUILDING_TAG="buildingTag"
+    KW_CHANGELOG="changelog"
+    KW_CHANGESET="changeset"
+    KW_CHANGE_REQUEST="changeRequest"
+    KW_EQUALS="equals"
+    KW_EXPRESSION="expression"
+    KW_TAG="tag"
+    KW_NOT="not"
+    KW_ALL_OF="allOf"
+    KW_ANY_OF="anyOf"
+    
+    // Parameter types
+    KW_STRING="string"
+    KW_TEXT="text"
+    KW_BOOLEAN_PARAM="booleanParam"
+    KW_CHOICE="choice"
+    KW_PASSWORD="password"
+    
+    // Trigger types
+    KW_CRON="cron"
+    KW_POLL_SCM="pollSCM"
+    KW_UPSTREAM="upstream"
+    
+    // Built-in steps
+    KW_ECHO="echo"
+    KW_SH="sh"
+    KW_BAT="bat"
+    KW_POWERSHELL="powershell"
+    KW_PWSH="pwsh"
+    KW_CHECKOUT="checkout"
+    KW_GIT="git"
+    KW_ARCHIVE_ARTIFACTS="archiveArtifacts"
+    KW_PUBLISH_TEST_RESULTS="publishTestResults"
+    KW_PUBLISH_HTML="publishHTML"
+    KW_STASH="stash"
+    KW_UNSTASH="unstash"
+    KW_BUILD="build"
+    KW_RETRY="retry"
+    KW_TIMEOUT="timeout"
+    KW_WAIT_UNTIL="waitUntil"
+    KW_SLEEP="sleep"
+    KW_DIR="dir"
+    KW_DELETE_DIR="deleteDir"
+    KW_FILE_EXISTS="fileExists"
+    KW_READ_FILE="readFile"
+    KW_WRITE_FILE="writeFile"
+    
+    // Credentials
+    KW_WITH_CREDENTIALS="withCredentials"
+    KW_USERNAME_PASSWORD="usernamePassword"
+    KW_SSH_USER_PRIVATE_KEY="sshUserPrivateKey"
+    KW_SECRET_FILE="secretFile"
+    KW_SECRET_TEXT="secretText"
+    
+    // Additional keywords
+    KW_LIBRARY="library"
+    KW_SCM="scm"
+    KW_INSTANCEOF="instanceof"
+    KW_IN="in"
+    KW_ARROW="->"
+    
+    // Common Groovy keywords
+    KW_DEF="def"
+    KW_RETURN="return"
+    KW_IF="if"
+    KW_ELSE="else"
+    KW_FOR="for"
+    KW_WHILE="while"
+    KW_TRY="try"
+    KW_CATCH="catch"
+    KW_FINALLY="finally"
+    KW_THROW="throw"
+    KW_SWITCH="switch"
+    KW_CASE="case"
+    KW_DEFAULT="default"
+    KW_BREAK="break"
+    KW_CONTINUE="continue"
+    KW_CLASS="class"
+    KW_INTERFACE="interface"
+    KW_IMPORT="import"
+    KW_PACKAGE="package"
+    KW_EXTENDS="extends"
+    KW_IMPLEMENTS="implements"
+    KW_STATIC="static"
+    KW_FINAL="final"
+    KW_PRIVATE="private"
+    KW_PROTECTED="protected"
+    KW_PUBLIC="public"
+    KW_ABSTRACT="abstract"
+    KW_NEW="new"
+    KW_THIS="this"
+    KW_SUPER="super"
+    KW_NULL="null"
+    KW_TRUE="true"
+    KW_FALSE="false"
+    
+    // Operators
+    ASSIGN="="
+    PLUS_ASSIGN="+="
+    MINUS_ASSIGN="-="
+    MULT_ASSIGN="*="
+    DIV_ASSIGN="/="
+    MOD_ASSIGN="%="
+    PLUS="+"
+    MINUS="-"
+    MULT="*"
+    DIV="/"
+    MOD="%"
+    POWER="**"
+    EQ="=="
+    NEQ="!="
+    LT="<"
+    LE="<="
+    GT=">"
+    GE=">="
+    AND="&&"
+    OR="||"
+    NOT="!"
+    BIT_AND="&"
+    BIT_OR="|"
+    BIT_XOR="^"
+    BIT_NOT="~"
+    LSHIFT="<<"
+    RSHIFT=">>"
+    URSHIFT=">>>"
+    ELVIS="?:"
+    SAFE_DOT="?."
+    SPREAD="*."
+    RANGE=".."
+    SPACESHIP="<=>"
+    REGEX_FIND="=~"
+    REGEX_MATCH="==~"
+    
+    // Delimiters
+    LBRACE="{"
+    RBRACE="}"
+    LPAREN="("
+    RPAREN=")"
+    LBRACKET="["
+    RBRACKET="]"
+    SEMICOLON=";"
+    COMMA=","
+    DOT="."
+    COLON=":"
+    QUESTION="?"
+    AT="@"
+    DOLLAR="$"
+    
+    // Literals
+    STRING_LITERAL='regexp:"[^"]*"'
+    SINGLE_QUOTED_STRING="regexp:'[^']*'"
+    MULTILINE_STRING='regexp:"""[^"]*"""'
+    MULTILINE_SINGLE_STRING="regexp:'''[^']*'''"
+    GSTRING='regexp:"[^"]*"'
+    NUMBER='regexp:[0-9]+(\.[0-9]+)?'
+    IDENTIFIER='regexp:[a-zA-Z_][a-zA-Z0-9_]*'
+    
+    // Comments
+    LINE_COMMENT='regexp://[^\r\n]*'
+    BLOCK_COMMENT='regexp:/\*([^*]|\*[^/])*\*/'
+    
+    // Whitespace
+    NEWLINE='regexp:\r?\n'
+    WHITE_SPACE='regexp:\s+'
+  ]
+}
+
+// Top-level rule
+jenkinsfile ::= (pipeline_block | scripted_pipeline)
+
+// Declarative Pipeline
+pipeline_block ::= KW_PIPELINE LBRACE pipeline_content* RBRACE
+
+pipeline_content ::= agent_block
+                   | stages_block
+                   | post_block
+                   | options_block
+                   | environment_block
+                   | parameters_block
+                   | triggers_block
+                   | tools_block
+                   | library_block
+
+// Agent block
+agent_block ::= KW_AGENT agent_spec
+
+agent_spec ::= LBRACE agent_content* RBRACE
+            | agent_simple
+
+agent_simple ::= KW_ANY | KW_NONE | KW_LABEL string_expression | KW_NODE string_expression
+
+agent_content ::= KW_LABEL COLON string_expression
+               | KW_NODE COLON string_expression
+               | KW_DOCKER COLON docker_spec
+               | KW_DOCKERFILE COLON dockerfile_spec
+               | KW_KUBERNETES COLON kubernetes_spec
+
+docker_spec ::= string_expression
+             | LBRACE docker_options* RBRACE
+
+docker_options ::= IDENTIFIER COLON string_expression
+                | IDENTIFIER COLON boolean_expression
+
+dockerfile_spec ::= LBRACE dockerfile_options* RBRACE
+
+dockerfile_options ::= IDENTIFIER COLON string_expression
+
+kubernetes_spec ::= LBRACE kubernetes_options* RBRACE
+
+kubernetes_options ::= IDENTIFIER COLON string_expression
+
+// Stages block
+stages_block ::= KW_STAGES LBRACE stage_block* RBRACE
+
+stage_block ::= KW_STAGE LPAREN string_expression RPAREN LBRACE stage_content* RBRACE
+
+stage_content ::= agent_block
+               | when_block
+               | steps_block
+               | parallel_block
+               | matrix_block
+               | post_block
+               | environment_block
+               | tools_block
+               | input_block
+
+// Steps block
+steps_block ::= KW_STEPS LBRACE step* RBRACE
+
+step ::= step_expression NEWLINE*
+
+step_expression ::= simple_step
+                 | script_block
+                 | dir_step
+                 | timeout_step
+                 | retry_step
+                 | withCredentials_step
+                 | parallel_step
+
+simple_step ::= builtin_step
+             | method_call
+             | assignment_expression
+             | expression
+
+builtin_step ::= KW_ECHO LPAREN string_expression RPAREN
+              | KW_SH LPAREN sh_params RPAREN
+              | KW_BAT LPAREN string_expression RPAREN
+              | KW_POWERSHELL LPAREN string_expression RPAREN
+              | KW_PWSH LPAREN string_expression RPAREN
+              | KW_CHECKOUT LPAREN scm_expression RPAREN
+              | KW_GIT LPAREN git_params RPAREN
+              | KW_ARCHIVE_ARTIFACTS LPAREN string_expression RPAREN
+              | KW_PUBLISH_TEST_RESULTS LPAREN test_params RPAREN
+              | KW_STASH LPAREN stash_params RPAREN
+              | KW_UNSTASH LPAREN string_expression RPAREN
+              | KW_BUILD LPAREN build_params RPAREN
+              | KW_SLEEP LPAREN time_params RPAREN
+              | KW_DELETE_DIR LPAREN RPAREN
+
+sh_params ::= string_expression
+           | LBRACE sh_options* RBRACE
+
+sh_options ::= IDENTIFIER COLON string_expression
+            | IDENTIFIER COLON boolean_expression
+
+git_params ::= string_expression
+            | LBRACE git_options* RBRACE
+
+git_options ::= IDENTIFIER COLON string_expression
+             | IDENTIFIER COLON boolean_expression
+
+test_params ::= LBRACE test_options* RBRACE
+
+test_options ::= IDENTIFIER COLON string_expression
+              | IDENTIFIER COLON boolean_expression
+              | IDENTIFIER COLON number_expression
+
+stash_params ::= LBRACE stash_options* RBRACE
+
+stash_options ::= IDENTIFIER COLON string_expression
+               | IDENTIFIER COLON boolean_expression
+
+build_params ::= LBRACE build_options* RBRACE
+
+build_options ::= IDENTIFIER COLON string_expression
+               | IDENTIFIER COLON parameter_array
+               | IDENTIFIER COLON boolean_expression
+
+time_params ::= number_expression
+             | LBRACE time COLON number_expression (COMMA unit COLON time_unit)? RBRACE
+
+time_unit ::= SECONDS | MINUTES | HOURS
+
+script_block ::= KW_SCRIPT LBRACE groovy_code* RBRACE
+
+dir_step ::= KW_DIR LPAREN string_expression RPAREN LBRACE step* RBRACE
+
+timeout_step ::= KW_TIMEOUT LPAREN timeout_params RPAREN LBRACE step* RBRACE
+
+timeout_params ::= number_expression
+                | LBRACE time COLON number_expression (COMMA unit COLON time_unit)? (COMMA activity COLON boolean_expression)? RBRACE
+
+retry_step ::= KW_RETRY LPAREN number_expression RPAREN LBRACE step* RBRACE
+
+withCredentials_step ::= KW_WITH_CREDENTIALS LPAREN credential_list RPAREN LBRACE step* RBRACE
+
+credential_list ::= LBRACKET credential_binding (COMMA credential_binding)* RBRACKET
+
+credential_binding ::= KW_USERNAME_PASSWORD LPAREN credential_params RPAREN
+                    | KW_SSH_USER_PRIVATE_KEY LPAREN ssh_params RPAREN
+                    | KW_SECRET_FILE LPAREN secret_file_params RPAREN
+                    | KW_SECRET_TEXT LPAREN secret_text_params RPAREN
+
+credential_params ::= LBRACE IDENTIFIER COLON string_expression COMMA IDENTIFIER COLON string_expression COMMA IDENTIFIER COLON string_expression RBRACE
+
+ssh_params ::= LBRACE IDENTIFIER COLON string_expression COMMA IDENTIFIER COLON string_expression (COMMA IDENTIFIER COLON string_expression)? RBRACE
+
+secret_file_params ::= LBRACE IDENTIFIER COLON string_expression COMMA IDENTIFIER COLON string_expression RBRACE
+
+secret_text_params ::= LBRACE IDENTIFIER COLON string_expression COMMA IDENTIFIER COLON string_expression RBRACE
+
+parallel_step ::= KW_PARALLEL parallel_branches
+
+parallel_branches ::= LBRACE parallel_branch (COMMA parallel_branch)* RBRACE
+
+parallel_branch ::= string_expression COLON LBRACE step* RBRACE
+
+// Parallel block
+parallel_block ::= KW_PARALLEL LBRACE parallel_stages RBRACE
+
+parallel_stages ::= stage_block (COMMA stage_block)*
+
+// Matrix block
+matrix_block ::= KW_MATRIX LBRACE matrix_content* RBRACE
+
+matrix_content ::= axes_block | stages_block | excludes_block
+
+axes_block ::= axes LBRACE axis_definition* RBRACE
+
+axis_definition ::= IDENTIFIER LBRACKET string_list RBRACKET
+
+string_list ::= string_expression (COMMA string_expression)*
+
+excludes_block ::= excludes LBRACE exclude_condition* RBRACE
+
+exclude_condition ::= axis LBRACE axis_value* RBRACE
+
+axis_value ::= IDENTIFIER string_expression
+
+// When block
+when_block ::= KW_WHEN LBRACE when_condition* RBRACE
+
+when_condition ::= KW_BRANCH string_expression
+                | KW_BUILDING_TAG LPAREN RPAREN
+                | KW_CHANGELOG string_expression
+                | KW_CHANGESET string_expression
+                | KW_CHANGE_REQUEST when_change_request_params?
+                | KW_ENVIRONMENT when_environment_params
+                | KW_EQUALS when_equals_params
+                | KW_EXPRESSION LBRACE groovy_code* RBRACE
+                | KW_TAG string_expression
+                | KW_NOT LBRACE when_condition* RBRACE
+                | KW_ALL_OF LBRACE when_condition* RBRACE
+                | KW_ANY_OF LBRACE when_condition* RBRACE
+
+when_change_request_params ::= LPAREN when_cr_options RPAREN
+
+when_cr_options ::= IDENTIFIER COLON string_expression
+
+when_environment_params ::= LPAREN IDENTIFIER COLON string_expression COMMA IDENTIFIER COLON string_expression RPAREN
+
+when_equals_params ::= LPAREN IDENTIFIER COLON expression COMMA IDENTIFIER COLON expression RPAREN
+
+// Input block
+input_block ::= KW_INPUT LBRACE input_content* RBRACE
+
+input_content ::= IDENTIFIER COLON string_expression
+               | IDENTIFIER COLON parameter_array
+
+// Post block
+post_block ::= KW_POST LBRACE post_condition* RBRACE
+
+post_condition ::= post_condition_type LBRACE step* RBRACE
+
+post_condition_type ::= KW_ALWAYS | KW_CHANGED | KW_FIXED | KW_REGRESSION | KW_ABORTED | KW_FAILURE | KW_SUCCESS | KW_UNSTABLE | KW_UNSUCCESSFUL | KW_CLEANUP
+
+// Options block
+options_block ::= KW_OPTIONS LBRACE option* RBRACE
+
+option ::= IDENTIFIER LPAREN build_discarder_params RPAREN
+        | IDENTIFIER LPAREN boolean_expression? RPAREN
+        | IDENTIFIER LPAREN RPAREN
+        | IDENTIFIER LPAREN boolean_expression RPAREN
+        | IDENTIFIER LPAREN number_expression? RPAREN
+        | IDENTIFIER LPAREN number_expression RPAREN
+        | IDENTIFIER LPAREN timeout_params RPAREN
+
+build_discarder_params ::= IDENTIFIER LPAREN log_rotator_options RPAREN
+
+log_rotator_options ::= LBRACE log_rotator_option (COMMA log_rotator_option)* RBRACE
+
+log_rotator_option ::= IDENTIFIER COLON string_expression
+
+// Environment block
+environment_block ::= KW_ENVIRONMENT LBRACE environment_variable* RBRACE
+
+environment_variable ::= IDENTIFIER ASSIGN expression
+
+// Parameters block
+parameters_block ::= KW_PARAMETERS LBRACE parameter_definition* RBRACE
+
+parameter_definition ::= parameter_type LPAREN parameter_options RPAREN
+
+parameter_type ::= KW_STRING | KW_TEXT | KW_BOOLEAN_PARAM | KW_CHOICE | KW_PASSWORD
+
+parameter_options ::= LBRACE parameter_option (COMMA parameter_option)* RBRACE
+
+parameter_option ::= IDENTIFIER COLON string_expression
+                  | IDENTIFIER COLON expression
+                  | IDENTIFIER COLON string_list
+
+parameter_array ::= LBRACKET parameter_assignment (COMMA parameter_assignment)* RBRACKET
+
+parameter_assignment ::= IDENTIFIER LPAREN expression RPAREN
+                      | KW_STRING LPAREN name COLON string_expression COMMA value COLON expression RPAREN
+
+// Triggers block
+triggers_block ::= KW_TRIGGERS LBRACE trigger_definition* RBRACE
+
+trigger_definition ::= KW_CRON LPAREN string_expression RPAREN
+                    | KW_POLL_SCM LPAREN string_expression RPAREN
+                    | KW_UPSTREAM LPAREN upstream_params RPAREN
+
+upstream_params ::= LBRACE IDENTIFIER COLON string_expression COMMA IDENTIFIER COLON threshold_value RBRACE
+
+threshold_value ::= SUCCESS | UNSTABLE | FAILURE
+
+// Tools block
+tools_block ::= KW_TOOLS LBRACE tool_definition* RBRACE
+
+tool_definition ::= tool_name string_expression
+
+tool_name ::= IDENTIFIER
+
+// Library block
+library_block ::= KW_LIBRARY LPAREN string_expression RPAREN
+
+// Scripted Pipeline (Groovy)
+scripted_pipeline ::= groovy_code*
+
+groovy_code ::= statement NEWLINE*
+
+statement ::= declaration
+           | expression_statement
+           | control_statement
+           | try_statement
+           | throw_statement
+           | return_statement
+           | import_statement
+           | package_statement
+
+declaration ::= variable_declaration
+             | function_declaration
+             | class_declaration
+
+variable_declaration ::= KW_DEF? IDENTIFIER (ASSIGN expression)?
+
+function_declaration ::= KW_DEF? type? IDENTIFIER LPAREN parameter_list? RPAREN block_statement
+
+class_declaration ::= KW_CLASS IDENTIFIER (KW_EXTENDS IDENTIFIER)? (KW_IMPLEMENTS identifier_list)? LBRACE class_body* RBRACE
+
+class_body ::= field_declaration | method_declaration | constructor_declaration
+
+field_declaration ::= modifier* type? IDENTIFIER (ASSIGN expression)? SEMICOLON?
+
+method_declaration ::= modifier* type? IDENTIFIER LPAREN parameter_list? RPAREN block_statement
+
+constructor_declaration ::= modifier* IDENTIFIER LPAREN parameter_list? RPAREN block_statement
+
+modifier ::= KW_STATIC | KW_FINAL | KW_PRIVATE | KW_PROTECTED | KW_PUBLIC | KW_ABSTRACT
+
+type ::= IDENTIFIER (DOT IDENTIFIER)* (LBRACKET RBRACKET)*
+
+expression_statement ::= expression SEMICOLON?
+
+control_statement ::= if_statement
+                   | for_statement
+                   | while_statement
+                   | switch_statement
+                   | break_statement
+                   | continue_statement
+
+if_statement ::= KW_IF LPAREN expression RPAREN statement (KW_ELSE statement)?
+
+for_statement ::= KW_FOR LPAREN for_init? SEMICOLON expression? SEMICOLON for_update? RPAREN statement
+
+for_init ::= variable_declaration | expression_list
+
+for_update ::= expression_list
+
+while_statement ::= KW_WHILE LPAREN expression RPAREN statement
+
+switch_statement ::= KW_SWITCH LPAREN expression RPAREN LBRACE switch_body* RBRACE
+
+switch_body ::= case_statement | default_statement
+
+case_statement ::= KW_CASE expression COLON statement*
+
+default_statement ::= KW_DEFAULT COLON statement*
+
+break_statement ::= KW_BREAK SEMICOLON?
+
+continue_statement ::= KW_CONTINUE SEMICOLON?
+
+try_statement ::= KW_TRY block_statement catch_clause* finally_clause?
+
+catch_clause ::= KW_CATCH LPAREN parameter RPAREN block_statement
+
+finally_clause ::= KW_FINALLY block_statement
+
+throw_statement ::= KW_THROW expression SEMICOLON?
+
+return_statement ::= KW_RETURN expression? SEMICOLON?
+
+import_statement ::= KW_IMPORT (KW_STATIC)? type (DOT MULT)? SEMICOLON?
+
+package_statement ::= KW_PACKAGE type SEMICOLON?
+
+block_statement ::= LBRACE statement* RBRACE
+
+// Expressions
+expression ::= conditional_expression
+
+conditional_expression ::= logical_or_expression (QUESTION expression COLON conditional_expression)?
+
+logical_or_expression ::= logical_and_expression (OR logical_and_expression)*
+
+logical_and_expression ::= inclusive_or_expression (AND inclusive_or_expression)*
+
+inclusive_or_expression ::= exclusive_or_expression (BIT_OR exclusive_or_expression)*
+
+exclusive_or_expression ::= and_expression (BIT_XOR and_expression)*
+
+and_expression ::= equality_expression (BIT_AND equality_expression)*
+
+equality_expression ::= relational_expression ((EQ | NEQ | REGEX_FIND | REGEX_MATCH) relational_expression)*
+
+relational_expression ::= shift_expression ((LT | LE | GT | GE | KW_INSTANCEOF | KW_IN) shift_expression)*
+
+shift_expression ::= additive_expression ((LSHIFT | RSHIFT | URSHIFT) additive_expression)*
+
+additive_expression ::= multiplicative_expression ((PLUS | MINUS) multiplicative_expression)*
+
+multiplicative_expression ::= power_expression ((MULT | DIV | MOD) power_expression)*
+
+power_expression ::= unary_expression (POWER unary_expression)*
+
+unary_expression ::= (PLUS | MINUS | NOT | BIT_NOT)? postfix_expression
+
+postfix_expression ::= primary_expression postfix_op*
+
+postfix_op ::= DOT IDENTIFIER
+            | SAFE_DOT IDENTIFIER
+            | SPREAD IDENTIFIER
+            | LBRACKET expression RBRACKET
+            | LPAREN argument_list? RPAREN
+            | LBRACE closure_body RBRACE
+
+primary_expression ::= literal
+                    | IDENTIFIER
+                    | KW_THIS
+                    | KW_SUPER
+                    | LPAREN expression RPAREN
+                    | array_literal
+                    | map_literal
+                    | closure_expression
+                    | gstring_expression
+
+literal ::= string_literal | number_literal | boolean_literal | null_literal
+
+string_literal ::= STRING_LITERAL | SINGLE_QUOTED_STRING | MULTILINE_STRING | MULTILINE_SINGLE_STRING
+
+number_literal ::= NUMBER
+
+boolean_literal ::= KW_TRUE | KW_FALSE
+
+null_literal ::= KW_NULL
+
+array_literal ::= LBRACKET expression_list? RBRACKET
+
+map_literal ::= LBRACKET map_entry_list? RBRACKET | LBRACKET COLON RBRACKET
+
+map_entry_list ::= map_entry (COMMA map_entry)*
+
+map_entry ::= map_key COLON expression
+
+map_key ::= expression | IDENTIFIER
+
+closure_expression ::= LBRACE closure_parameters? closure_body RBRACE
+
+closure_parameters ::= parameter_list? KW_ARROW
+
+closure_body ::= statement*
+
+gstring_expression ::= GSTRING
+
+assignment_expression ::= IDENTIFIER assignment_operator expression
+
+assignment_operator ::= ASSIGN | PLUS_ASSIGN | MINUS_ASSIGN | MULT_ASSIGN | DIV_ASSIGN | MOD_ASSIGN
+
+method_call ::= IDENTIFIER LPAREN argument_list? RPAREN
+             | IDENTIFIER argument_list
+             | expression DOT IDENTIFIER LPAREN argument_list? RPAREN
+             | expression DOT IDENTIFIER argument_list
+
+argument_list ::= expression (COMMA expression)*
+
+expression_list ::= expression (COMMA expression)*
+
+parameter_list ::= parameter (COMMA parameter)*
+
+parameter ::= type? IDENTIFIER (ASSIGN expression)?
+
+identifier_list ::= IDENTIFIER (COMMA IDENTIFIER)*
+
+scm_expression ::= KW_SCM
+                | KW_GIT LPAREN string_expression RPAREN
+                | LBRACKET scm_definition RBRACKET
+
+scm_definition ::= DOLLAR IDENTIFIER COLON string_expression COMMA IDENTIFIER COLON string_expression (COMMA scm_option)*
+
+scm_option ::= IDENTIFIER COLON string_expression
+
+string_expression ::= string_literal | expression
+
+boolean_expression ::= boolean_literal | expression
+
+number_expression ::= number_literal | expression
