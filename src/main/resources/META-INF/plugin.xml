@@ -32,5 +32,34 @@
                   extensions="jenkinsfile"
                   patterns="Jenkinsfile"/>
 
+        <!-- Syntax Highlighter Factory -->
+        <lang.syntaxHighlighterFactory 
+            language="Jenkinsfile"
+            implementationClass="org.example.jenkinsfile_support.highlighting.JenkinsfileSyntaxHighlighterFactory"/>
+
+        <!-- Parser Definition -->
+        <lang.parserDefinition 
+            language="Jenkinsfile"
+            implementationClass="org.example.jenkinsfile_support.JenkinsfileParserDefinition"/>
+
+        <!-- Color Settings Page -->
+        <colorSettingsPage 
+            implementation="org.example.jenkinsfile_support.highlighting.JenkinsfileColorSettingsPage"/>
+
+        <!-- Code Folding Builder -->
+        <lang.foldingBuilder 
+            language="Jenkinsfile"
+            implementationClass="org.example.jenkinsfile_support.editor.JenkinsfileFoldingBuilder"/>
+
+        <!-- Brace Matcher -->
+        <lang.braceMatcher 
+            language="Jenkinsfile"
+            implementationClass="org.example.jenkinsfile_support.editor.JenkinsfileBraceMatcher"/>
+
+        <!-- Commenter -->
+        <lang.commenter 
+            language="Jenkinsfile"
+            implementationClass="org.example.jenkinsfile_support.editor.JenkinsfileCommenter"/>
+
     </extensions>
 </idea-plugin>

@@ -1,0 +1,55 @@
+pipeline {
+    agent any
+
+    environment {
+        BUILD_ENV = "production"
+        PATH = "${env.PATH}:/custom/bin"
+    }
+
+    options {
+        timestamps()
+    }
+
+    stages {
+        stage("Build") {
+            steps {
+                echo "Building version ${env.BUILD_ENV}"
+                sh 'npm install'
+            }
+        }
+
+        stage("Test") {
+            steps {
+                sh '''
+                    echo "Running tests..."
+                    npm test
+                '''
+            }
+        }
+
+        stage("Deploy") {
+            when {
+                branch "main"
+            }
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'deploy-creds', usernameVariable: 'USER', passwordVariable: 'PASS')]) {
+                    sh "scp build/* $USER@prod.server:/app"
+                }
+            }
+        }
+
+        stage("aa"){}
+    }
+
+    post {
+        always {
+            echo 'Cleaning up...'
+        }
+        success {
+            echo "Deployment successful ✅"
+        }
+        failure {
+            echo "Build failed ❌"
+        }
+    }
+}
